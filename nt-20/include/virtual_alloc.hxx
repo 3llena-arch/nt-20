@@ -2,7 +2,7 @@
 
 namespace nt {
    // attempts to allocate memory in the current process space at an address
-   export const std::int32_t virtual_alloc(
+   export const std::intptr_t virtual_alloc(
       const std::intptr_t address, // address of the memory allocation
       const std::intptr_t size, // length of memory allocation
       const std::int32_t type, // type of memory allocation

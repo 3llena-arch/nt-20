@@ -2,7 +2,7 @@
 
 namespace nt {
    // attempts to allocate memory in the process space at an address of a pe object
-   export const std::int32_t virtual_alloc_ex(
+   export const std::intptr_t virtual_alloc_ex(
       const std::intptr_t handle, // handle to pe object
       const std::intptr_t address, // address of the memory allocation
       const std::intptr_t size, // length of memory allocation

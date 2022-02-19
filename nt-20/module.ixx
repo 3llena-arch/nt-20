@@ -6,6 +6,12 @@ module;
 
 export module windows;
 
+#include "include/is_child.hxx"
+#include "include/is_window.hxx"
+#include "include/is_window_visible.hxx"
+#include "include/is_window_enabled.hxx"
+#include "include/top_window.hxx"
+#include "include/next_window.hxx"
 #include "include/alloc_console.hxx"
 #include "include/free_console.hxx"
 #include "include/proc_address.hxx"
