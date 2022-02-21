@@ -6,7 +6,8 @@ const enum snap_flag_t : std::int8_t {
    module = 8
 };
 
-const struct snap_process_t : public process_entry_t {
+export const struct snap_process_t : process_entry_t {
+   std::string_view m_file_name;
    std::vector< module_entry_t >m_modules;
    std::vector< thread_entry_t >m_threads;
 };
@@ -79,12 +80,18 @@ const std::optional< const std::vector< thread_entry_t > >get_thread_list(
 }
 
 export const void enumerate(
-   const std::function< const void( snap_process_t ) >&callback,
-   const std::string_view file_name
+   const std::function< void( const snap_process_t ) >&callback
 ) {
    const auto process_list = get_process_list( );
    if ( !process_list.has_value( ) )
       return;
 
-   // build mod + th cache
+   for ( auto it : process_list.value( ) ) {
+      const snap_process_t ctx{ 
+         .m_file_name = std::string_view{ reinterpret_cast< char* >( it.m_file_name ) },
+         .m_modules = get_module_list( it ).value( ),
+         .m_threads = get_thread_list( it ).value( )
+      };
+      callback( std::move( ctx ) );
+   }
 }
